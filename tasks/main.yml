@@ -1,0 +1,12 @@
+---
+# tasks file for apache
+- yum: name=epel-release state=latest
+  when: ansible_distribution == 'CentOS'
+- apt: name=nginx state=latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+- service: name=nginx state=restarted
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+- yum: name=nginx state=latest
+  when: ansible_distribution == 'CentOS'
+- service: name=nginx state=restarted
+  when: ansible_distribution == 'CentOS'
